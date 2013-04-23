@@ -27,7 +27,7 @@
 				
 			<!----- for each elements goes her----->
 			<div class="row answerItem">
-			  <li class="ui-widget-content">
+			  <li>
 			  	<div class="span2">
 			  		<div class="outerCircle"><div class="innerCircle"><p class="questionNumber">A</p></div></div>
 			  	</div>	
@@ -37,7 +37,7 @@
 			  </li>
 			  </div>
 			<div class="row answerItem">
-			  <li class="ui-widget-content">
+			  <li>
 			  	<div class="span2">
 			  		<div class="outerCircle"><div class="innerCircle"><p class="questionNumber">A</p></div></div>
 			  	</div>	
