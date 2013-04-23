@@ -1,0 +1,211 @@
+
+/* login page */
+
+.loginError{
+  color:#eb593c;
+  font-family: "segoeui";
+  font-size: 14px;
+  background-image: url("../img/symDel.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  padding-left: 20px;
+}
+
+.loginTitle{
+  font-family: "segoeui";
+  font-size: 20px;
+  font-weight: bold;
+  color: #5d5d5d;
+  margin-bottom: 15px;
+  
+}
+
+.largeInput{
+  width: 260px;
+}
+
+.loginBtn{
+  height: 30px;
+  width:70px !important;
+  font-family: "segoe_semiBold";
+  font-size: 14px;
+  margin-top: 10px;
+  margin-right: 45px;
+}
+
+.signupBtn{
+	float:left !important;
+}
+.loginBtn:hover{
+  background-color: #46beb5;
+}
+
+.metroBtn{
+  width: 250px;
+  height: 35px;
+  color: #fff9f5;
+  font-size: 16px;
+  background-color: #3ea9a1;
+  font-weight:lighter;
+  font-family:"segoe_semiBold";
+  border: none;
+  float: right;
+  margin-bottom: 20px;
+}
+.metroBtn img{
+  padding-right: 20px;
+}
+
+.loginTitle img{
+  
+  margin: 100px auto 0px -20px;
+}
+.login-body{
+background-color:#f6f6f6;
+}
+
+/* footer */
+
+.copyRight{
+	width: 100%;
+	height: 40px;
+	left: 0;
+	right: 0;
+	color:#6f6f6f;
+	background-position: top;
+	background-repeat: repeat-x;
+	text-align: center;
+	padding-top: 30px;
+}
+
+.labelText{
+	color:#6f6f6f;
+}
+
+.registerBtn{
+	text-decoration: none !important;
+	border-radius: 10px;
+	color: #fff9f5 !important;
+	text-align: center;
+	padding-top: 8px;
+	height: 28px;
+	float: left;
+	margin-top: 0px;
+	
+	
+}
+.registerBtn:hover{
+	color:#fff9f5  !important;
+}
+
+.registered{
+	width:70%;
+    color:#fff9f5;
+    text-align:center;
+    padding-top:5px;
+    height:20px;
+    background-color:#3ea9a1;
+}
+
+.mainBody{
+	background-color:#f6f6f6;
+}
+
+.course{
+	margin-top:2%;
+	vertical-align:middle;
+	height:auto;
+    background-color:#fffff9;
+    border-radius:15px;
+    padding:20px;
+    
+	-webkit-box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.5);
+     -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+          
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+          color:#5d5d5d;
+}
+
+.lessonHeader{
+	border-radius: 10px 10px 0px 0px;
+}
+
+.sessionsTXT{
+	font-family: 'calibri';
+	font-size:1.5em;
+	color: #6f6f6f;
+	line-height: 1.8em;
+}
+
+.sessionsbreak{
+	height: 1px;
+	background-color: #e9e9e9;
+	margin:20px -20px 20px -20px;
+	
+}
+
+.sessionListBottom{
+	height: 30px;
+	background-color: #f0f0f0;
+	margin:-20px -20px -20px -20px;
+	padding: 20px;
+	border-radius:0px 0px 15px 15px ;
+}
+.questionHeader{
+	height: 30px;
+	background-color: #f0f0f0;
+	margin:-20px -20px 20px -20px;
+	padding: 20px;
+	border-radius: 15px 15px 0px 0px;
+}
+
+.breadcrumbMargin {
+	margin-bottom: 25px;
+}
+
+.questionPopUp{
+	width: 80%;
+}
+
+
+.outerCircle{
+	width:40px;
+	height: 40px;
+	border-radius: 30px;
+	background-color: #aaa;
+	padding:10px;
+	text-align: center;
+}
+
+.outerCircleSelected{
+	width:40px;
+	height: 40px;
+	border-radius: 30px;
+	padding:10px;
+	text-align: center;
+	background-color: #3ea9a1;
+}
+
+.innerCircle{
+	
+	width:40px;
+	height: 40px;
+	border-radius: 20px;
+	background-color: #fff;
+}
+
+.questionNumber{
+	font-size: 26px;
+	font-weight:bold;
+	line-height: 40px;
+}
+
+.answerItem{
+	cursor: pointer;
+	margin-bottom: 50px;
+}
+
+#selectable{
+	list-style: none;
+	
+}
