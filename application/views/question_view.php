@@ -19,34 +19,32 @@
 <!---------------------- body ------------------->
 <div class="row-fluid">
 	<div class="span8 offset2 course">
-		<div class="questionHeader"><p>Question goes here</p></div>
+		<div class="questionHeader"><p class="sessionsTXT grayText" style="font-size: 1.4em !important;"><?php echo $question[0]->question ?></p></div>
 		
 		
 		
 			<ol id="selectable">
-				
+			
+			<?php foreach ($randAnswers as $key => $answer) {?>
 			<!----- for each elements goes her----->
-			<div class="row answerItem">
+			<div class="row answerItem" id="<?php echo $answer->answer_ID ?>">
+				<input type="hidden" name="quiz_ID" value="<?php echo $quiz[0]->quiz_ID  ?>" />
+				<input type="hidden" name="question_ID" value="<?php echo $question[0]->question_ID ?>" />
+				<input type="hidden" name="lesson_ID" value="<?php echo $lessons[0]->lesson_ID ?>" />
+				<input type="hidden" name="course_ID" value="<?php echo $course[0]->course_ID ?>" />
+				<input type="hidden" name="position" value="<?php echo $question[0]->position ?>" />
 			  <li>
-			  	<div class="span2">
-			  		<div class="outerCircle"><div class="innerCircle"><p class="questionNumber">A</p></div></div>
+			  	<div class="span2 offset1">
+			  		<div class="outerCircle"><div class="innerCircle"><p class="questionNumber"><?php echo $answerLetters[$key] ?></p></div></div>
 			  	</div>	
 			  	<div class="span8" style="padding-top:15px;">	
-			  		<p>answeresansweres</p>
-			  	</div>
-			  </li>
-			  </div>
-			<div class="row answerItem">
-			  <li>
-			  	<div class="span2">
-			  		<div class="outerCircle"><div class="innerCircle"><p class="questionNumber">A</p></div></div>
-			  	</div>	
-			  	<div class="span8" style="padding-top:15px;">	
-			  		<p>answeresansweres</p>
+			  		<p style="font-size: 1.2em;font-family: 'calibri';"><?php echo htmlentities($answer->answer) ?></p>
+			  		
 			  	</div>
 			  </li>
 			  </div>
 			
+			<?php } ?>
 			
 			<!----- end for each ----->
 		

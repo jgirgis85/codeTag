@@ -154,7 +154,7 @@ background-color:#f6f6f6;
 .questionHeader{
 	height: 30px;
 	background-color: #f0f0f0;
-	margin:-20px -20px 20px -20px;
+	margin:-20px -20px 40px -20px;
 	padding: 20px;
 	border-radius: 15px 15px 0px 0px;
 }
@@ -208,4 +208,8 @@ background-color:#f6f6f6;
 #selectable{
 	list-style: none;
 	
+}
+
+.grayText{
+	color:#999;
 }

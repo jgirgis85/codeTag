@@ -6,6 +6,21 @@ $(document).ready(function() {
 		selected: function(){
     		$(".ui-selected", this).each(function(){
      	 	$(this).find('.outerCircle').removeClass('outerCircle').addClass('outerCircleSelected');
+     	 	answer_ID = $(this).attr('id');
+     	 	question_ID = $(this).find('input[name=question_ID]').val();
+     	 	lesson_ID = $(this).find('input[name=lesson_ID]').val();
+     	 	quiz_ID = $(this).find('input[name=quiz_ID]').val();
+     	 	course_ID = $(this).find('input[name=course_ID]').val();
+     	 	oldPosition = $(this).find('input[name=position]').val();
+     	 	position = parseInt(oldPosition)+1;
+     	 	
+     	 	 window.location =   baseUrl+'quizzes/view/'+quiz_ID+'/'+lesson_ID+'/'+course_ID+'/'+position+'/'+question_ID+'/'+answer_ID;
+		           
+		                	
+		               
+     	 	
+     	 	
+     	 	
     });
 	
 	}

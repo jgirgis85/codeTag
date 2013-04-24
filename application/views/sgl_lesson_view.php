@@ -74,7 +74,7 @@
 					<p class="sessionsTXT"><?php echo $quiz->title ?></p>
 				</div>
 				<div class="span4">
-					<a href="<?php echo base_url() ?>quizzes/view/<?php echo $quiz->quiz_ID ?>/<?php echo $lessons[0]->lesson_ID ?>/<?php echo $course[0]->course_ID ?>">
+					<a href="<?php echo base_url() ?>quizzes/view/<?php echo $quiz->quiz_ID ?>/<?php echo $lessons[0]->lesson_ID ?>/<?php echo $course[0]->course_ID ?>/1/0/0">
 						<button style="width: 68px;margin-bottom: 15px;" class="btn">Solve</button>
 					</a>
 					<a href="<?php echo base_url() ?>quizzes/edit/<?php echo $quiz->quiz_ID ?>/<?php echo $lessons[0]->lesson_ID ?>/<?php echo $course[0]->course_ID ?>">
@@ -87,7 +87,7 @@
 					<p class="sessionsTXT"><?php echo $quiz->title ?></p>
 				</div>
 				<div class="span1">
-					<a href="<?php echo base_url() ?>quizzes/view/<?php echo $quiz->quiz_ID ?>/<?php echo $lessons[0]->lesson_ID ?>/<?php echo $course[0]->course_ID ?>">
+					<a href="<?php echo base_url() ?>quizzes/view/<?php echo $quiz->quiz_ID ?>/<?php echo $lessons[0]->lesson_ID ?>/<?php echo $course[0]->course_ID ?>/1/0/0">
 					<button style="width: 68px;margin-bottom: 15px;" class="btn">Solve</button>
 					</a>
 				</div>

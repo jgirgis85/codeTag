@@ -10,30 +10,152 @@ class Quizzes extends CI_Controller {
 			$this->load->model('Quizzes_model','quizzes');
 			$this->load->model('Lessons_model','lessons');
 			$this->load->model('Courses_model','courses');
+			$this->load->library('session');
+			$this->load->model('Login_model','users');
 			
 		}
 	public function index()
 	{
-			
+		
+		
 	}
 	
-	public function view($quiz_ID,$lesson_ID,$course_ID)
+	
+	public function view($quiz_ID,$lesson_ID,$course_ID,$position,$question_ID,$answer_ID)
 	{
+		
 		$lessons = $this->lessons->getLessonsByLessonID($lesson_ID);
 		$course = $this->courses->getCourses($course_ID);
 		$quiz = $this->quizzes->getQuiz($quiz_ID);
-		$questions = $this->quizzes->getQuestions($quiz_ID);
+		$questionsCount = $this->quizzes->countQuestions($quiz_ID);
+		$answerLetters = array ('A','B','C','D');
 		
-		$data = array(
-		'lessons' => $lessons,
-		'course' => $course,
-		'quiz' => $quiz,
-		'questions' => $questions
-		);
+		if($position==1){
+			
+			//delete all entries in the question and answer temp table
+			
+			$this->quizzes->deleteTempAns();
+			
+			$question = $this->quizzes->getQuestion($position);
+			$randAnswers = $this->quizzes->getRandomAnswers($question[0]->question_ID);
+			
+			$data = array(
+			'lessons' => $lessons,
+			'course' => $course,
+			'quiz' => $quiz,
+			'question' => $question,
+			'randAnswers' =>$randAnswers,
+			'answerLetters' =>$answerLetters
+			);
+			
+			$this->load->view('header.php'); 
+			$this->load->view('question_view.php',$data); 
+			$this->load->view('footer.php');
+			
+		}else{
+			 if($position<=$questionsCount){
+			 	
+					// store question and answer in temp table
+					$tempData = array(
+					'question_ID' => $question_ID,
+					'answer_ID' => $answer_ID
+					);
+					
+					
+					$this->quizzes->addAnswersToTemp($tempData);
+					
+				 	$question = $this->quizzes->getQuestion($position);
+					$randAnswers = $this->quizzes->getRandomAnswers($question[0]->question_ID);
+					
+					$data = array(
+					'lessons' => $lessons,
+					'course' => $course,
+					'quiz' => $quiz,
+					'question' => $question,
+					'randAnswers' =>$randAnswers,
+					'answerLetters' =>$answerLetters
+					);
+					
+					$this->load->view('header.php'); 
+					$this->load->view('question_view.php',$data); 
+					$this->load->view('footer.php');
+			 	
+			 }else{
+			 	
+				//get user id to save his results
+				
+				$username = $this->session->userdata('username');
+				$userData = $this->users->getUser($username);
+				$user_ID = $userData[0]->user_ID;
+			 	
+				// get the quiz pass count
+				
+				$quiz_pass_count = $quiz[0]->pass_count;
+				
+				//define right and wrong questions counts
+				
+				$rightCount = 0;
+				$wrongCount = 0;
+				
+			 	//store last question and answer in database
+			 	
+			 	$tempData = array(
+					'question_ID' => $question_ID,
+					'answer_ID' => $answer_ID
+					);
+					
+					
+					$this->quizzes->addAnswersToTemp($tempData);
+					
+					// get all entries from the temp table
+					$tempAnswers = $this->quizzes->getAllTemps();
+					
+					//loop through theme and count how many right and wrong answers
+					
+					foreach ($tempAnswers as $temp) {
+						
+						$answer_ID = $temp->answer_ID;
+						$result = $this->quizzes->getAnswerStatus($answer_ID);
+						
+						if($result[0]->status =='right'){$rightCount+=1 ;}else{$wrongCount+=1;}
+					}
+					//store result in the quiz result table
+					
+					$resultData = array(
+					'quiz_ID' =>$quiz_ID,
+					'user_ID' => $user_ID,
+					'wrong_count' => $wrongCount,
+					'right_count' => $rightCount
+					);
+					$this->quizzes->addResult($resultData);
+					
+					if($rightCount>=$quiz_pass_count)
+						{
+							//empty the temp table
+							$this->quizzes->deleteTempAns();
+							
+							//display the congrats screen and goback option
+							$this->load->view('header.php'); 
+							$this->load->view('quiz_success_view.php',$resultData); 
+							$this->load->view('footer.php');
+							
+							
+						}else{
+							
+							//empty the temp table
+							$this->quizzes->deleteTempAns();
+							
+							//display the failed screen and goback+retry options
+							$this->load->view('header.php'); 
+							$this->load->view('quiz_failed_view.php',$resultData); 
+							$this->load->view('footer.php');
+							
+						}
+					
+				
+			 }
+		}
 		
-		$this->load->view('header.php'); 
-		$this->load->view('question_view.php',$data); 
-		$this->load->view('footer.php');
 	}
 	
 	// function to add quiz and the first question with answers

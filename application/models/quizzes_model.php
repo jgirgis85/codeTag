@@ -15,6 +15,11 @@
 	    $this->db->insert('questions', $data);
 	    return $this->db->insert_id();
 	}
+	function addAnswersToTemp($tempData)
+	{
+	    $this->db->insert('anstemptbl', $tempData);
+	    return $this->db->insert_id();
+	}
 	
 	function countQuestions($quiz_ID)
 	{
@@ -25,6 +30,12 @@
 	function addAnswers($data)
 	{
 	    $this->db->insert_batch('answers', $data);
+	    return $this->db->insert_id();
+	}
+	
+	function addResult($resultData)
+	{
+	    $this->db->insert('results', $resultData);
 	    return $this->db->insert_id();
 	}
 	
@@ -46,6 +57,14 @@
 	    $this->db->order_by('position', 'asc');
 	    return $this->db->get()->result();
 	}
+	function getQuestion($position)
+	{
+	    $this->db->select('question_ID,question,quiz_ID,position');
+	    $this->db->from('questions');
+		$this->db->where('position', $position);
+	    $this->db->order_by('position', 'asc');
+	    return $this->db->get()->result();
+	}
 	function questionPosition($question_ID)
 	{
 	    $this->db->select('position');
@@ -63,6 +82,20 @@
 	    return $this->db->affected_rows();
 	}
 	
+	function deleteTempAns()
+	{
+	    $this->db->empty_table('anstemptbl');
+	    return $this->db->affected_rows();
+	}
+	
+	public function getAllTemps()
+	{
+		$this->db->select('*');
+	    $this->db->from('anstemptbl');
+	    return $this->db->get()->result();
+	}
+	
+	
 	function getHighestPosition($quiz_ID)
 	{
 	    $this->db->select('position');
@@ -73,10 +106,27 @@
 	}
 	function getAnswers($question_ID)
 	{
-	    $this->db->select('question_ID,answer_ID,answer,status');
+	    $this->db->select('question_ID,answer_ID,"answer",status');
 	    $this->db->from('answers');
 		$this->db->where('question_ID', $question_ID);
 	    $this->db->order_by('answer_ID', 'asc');
+	    return $this->db->get()->result();
+	}
+	
+	function getAnswerStatus($answer_ID)
+	{
+	    $this->db->select('status');
+	    $this->db->from('answers');
+		$this->db->where('answer_ID', $answer_ID);
+	    $this->db->order_by('answer_ID', 'asc');
+	    return $this->db->get()->result();
+	}
+	function getRandomAnswers($question_ID)
+	{
+	    $this->db->select('answer_ID,answer,status');
+	    $this->db->from('answers');
+		$this->db->where('question_ID', $question_ID);
+	    $this->db->order_by('RAND()');
 	    return $this->db->get()->result();
 	}
 
