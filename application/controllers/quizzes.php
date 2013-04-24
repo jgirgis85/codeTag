@@ -122,12 +122,34 @@ class Quizzes extends CI_Controller {
 					//store result in the quiz result table
 					
 					$resultData = array(
-					'quiz_ID' =>$quiz_ID,
-					'user_ID' => $user_ID,
 					'wrong_count' => $wrongCount,
 					'right_count' => $rightCount
 					);
-					$this->quizzes->addResult($resultData);
+					
+					//check if a record in the results database already exist update it else add new one
+					
+					if($this->quizzes->getResults($quiz_ID,$user_ID)){
+						
+						//update this entry with the new data
+						$this->quizzes->updateResult($quiz_ID,$user_ID,$resultData);
+						
+					}else{
+						
+						//add a new record
+						$this->quizzes->addResult($resultData);
+						
+					}
+					
+					
+					$resultPageArray = array(
+					
+					'lessons' => $lessons,
+					'course' => $course,
+					'quiz' => $quiz,
+					'wrong_count' => $wrongCount,
+					'right_count' => $rightCount
+					);
+					
 					
 					if($rightCount>=$quiz_pass_count)
 						{
@@ -136,7 +158,7 @@ class Quizzes extends CI_Controller {
 							
 							//display the congrats screen and goback option
 							$this->load->view('header.php'); 
-							$this->load->view('quiz_success_view.php',$resultData); 
+							$this->load->view('quiz_success_view.php',$resultPageArray); 
 							$this->load->view('footer.php');
 							
 							
@@ -147,7 +169,7 @@ class Quizzes extends CI_Controller {
 							
 							//display the failed screen and goback+retry options
 							$this->load->view('header.php'); 
-							$this->load->view('quiz_failed_view.php',$resultData); 
+							$this->load->view('quiz_failed_view.php',$resultPageArray); 
 							$this->load->view('footer.php');
 							
 						}

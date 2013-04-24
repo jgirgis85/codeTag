@@ -48,6 +48,16 @@
 	    $this->db->order_by('quiz_ID', 'asc');
 	    return $this->db->get()->result();
 	}
+
+	function getResults($quiz_ID,$user_ID)
+	{
+	    $this->db->select('result_ID,quiz_ID,user_ID,wrong_count,right_count');
+	    $this->db->from('results');
+		$this->db->where('user_ID', $user_ID);
+		$this->db->where('quiz_ID', $quiz_ID);
+	    $this->db->order_by('quiz_ID', 'asc');
+	    return $this->db->get()->result();
+	}
 	
 	function getQuestions($quiz_ID)
 	{
@@ -106,7 +116,7 @@
 	}
 	function getAnswers($question_ID)
 	{
-	    $this->db->select('question_ID,answer_ID,"answer",status');
+	    $this->db->select('question_ID,answer_ID,answer,status');
 	    $this->db->from('answers');
 		$this->db->where('question_ID', $question_ID);
 	    $this->db->order_by('answer_ID', 'asc');
@@ -151,6 +161,14 @@
 		 $this->db->where('question_ID', $question_ID);
 	    $this->db->update('questions', $data);
 	    return $this->db->affected_rows();
+	}
+	
+	function updateResult($quiz_ID,$user_ID,$resultData)
+	{
+		 $this->db->where('quiz_ID', $quiz_ID);
+		 $this->db->where('user_ID', $user_ID);
+	     $this->db->update('results', $resultData);
+	     return $this->db->affected_rows();
 	}
 	
 	function updateAnswer($answer_ID,$data)
