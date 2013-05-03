@@ -20,40 +20,49 @@
 			</div>
 			
 	</div>
-
-<?php foreach($lessons as $lesson): ?>	
 	<div class="row-fluid">
-		<div class="span8 offset2 course">
-				<div class="span3" style="text-align: center;">
-					<img  src="<?php echo base_url(); ?>assets/img/<?php echo $lesson->img ?>" />
+		<div class="span8 offset2">
+<?php foreach($lessons as $lesson): ?>	
+	<div class="span6 course">
+				<div class="row">
+					<div class="span12" style="text-align: center;">
+						<img  src="<?php echo base_url(); ?>assets/img/<?php echo $lesson->img ?>" />
+					</div>
 				</div>
 				<?php if($editMode== true){ ?>
-				<div class="span5">
+				<div class="row-fluid">
+					<div class="span10 offset1">
 					<h3><?php echo $lesson->title ?></h3>
 					<p><?php echo $lesson->desc ?></p>
 					<p>duration : number of sessions</p>
 					<p>passed or not</p>
-					
 				</div>
-				<div class="span4">
+				</div>
+				<div class="row-fluid">
+					<div class="span10 offset1">
 					<a href="<?php echo base_url() ?>lessons/lessonExplorer/<?php echo $lesson->lesson_ID ?>/<?php echo $lesson->course_ID ?>"><button style="margin-bottom: 15px;width: 68px" class="btn">View</button></a>
 					<a href="#editModal<?php echo $lesson->lesson_ID ?>" data-toggle="modal"><button style="width: 68px;margin-bottom: 15px;" class="btn btn btn-warning">Edit</button></a>
 					<a href="#delModal<?php echo $lesson->lesson_ID ?>" data-toggle="modal"><button style="width: 68px;margin-bottom: 15px;" class="btn btn btn-danger">Delete</button></a>
 				</div>
+				</div>
 				<?php }else{ ?>
-				<div class="span7">
+				<div class="row-fluid">
+					<div class="span10 offset1">
 					<h3><?php echo $lesson->title ?></h3>
 					<p><?php echo $lesson->desc ?></p>
 					<p>duration : number of sessions</p>
 					<p>passed or not</p>
 				</div>
-				<div class="span1">
+				</div>
+				<div class="row-fluid">
+					<div class="span1 offset9">
 					<a href="<?php echo base_url() ?>lessons/lessonExplorer/<?php echo $lesson->lesson_ID ?>/<?php echo $lesson->course_ID ?>"><button style="margin-bottom: 15px;width: 68px" class="btn">View</button></a>
+				</div>
 				</div>
 				<?php } ?>
 				
 			</div>
-		</div>	
+		
 		
 		
 		<!----------------- Delete Modal --------------------->
@@ -97,7 +106,8 @@
 		</div>
 		
 <?php endforeach ?>
-
+</div>
+</div>
 <!----------------- Add Modal --------------------->
 		
 		<div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
