@@ -96,6 +96,16 @@
 			<div class="sessionsbreak"></div>
 			
 		<?php endforeach ?>	
+		
+			<!---------------------------------- listing lesson practices ------------------------------>
+			<div class="row-fluid">
+				<div class="span8">
+					<p>practice</p>
+					<p>practice</p>
+					<p>practice</p>
+					<button class="btn">view</button>
+				</div>
+			</div>
 		<div class="sessionListBottom"><p> VIDEOS •  QUIZ • 0 PRACTICE</p></div>
 		</div>
 		
