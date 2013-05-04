@@ -23,6 +23,15 @@ class Quizzes extends CI_Controller {
 	
 	public function view($quiz_ID,$lesson_ID,$course_ID,$position,$question_ID,$answer_ID)
 	{
+		$rightCount;
+		$wrongCount;
+		$resultAlert= "";
+		$exist = "";
+		//get user id to save his results
+				
+		$username = $this->session->userdata('username');
+		$userData = $this->users->getUser($username);
+		$user_ID = $userData[0]->user_ID;
 		
 		$lessons = $this->lessons->getLessonsByLessonID($lesson_ID);
 		$course = $this->courses->getCourses($course_ID);
@@ -82,12 +91,7 @@ class Quizzes extends CI_Controller {
 			 	
 			 }else{
 			 	
-				//get user id to save his results
 				
-				$username = $this->session->userdata('username');
-				$userData = $this->users->getUser($username);
-				$user_ID = $userData[0]->user_ID;
-			 	
 				// get the quiz pass count
 				
 				$quiz_pass_count = $quiz[0]->pass_count;
@@ -123,35 +127,45 @@ class Quizzes extends CI_Controller {
 					
 					$resultData = array(
 					'wrong_count' => $wrongCount,
-					'right_count' => $rightCount
+					'right_count' => $rightCount,
+					'user_ID' =>$user_ID,
+					'quiz_ID'=>$quiz_ID
 					);
 					
 					//check if a record in the results database already exist update it else add new one
 					
-					if($this->quizzes->getResults($quiz_ID,$user_ID)){
-						
-						//update this entry with the new data
-						$this->quizzes->updateResult($quiz_ID,$user_ID,$resultData);
+					if($res = $this->quizzes->getResults($quiz_ID,$user_ID)){
+						$exist = "old";
+						//check if new result is better than the old one update it
+						if($rightCount>$res[0]->right_count){
+							$this->quizzes->updateResult($quiz_ID,$user_ID,$resultData);
+							$resultAlert = "progress";
+						}else{
+							$resultAlert = "no_progress";
+						}
 						
 					}else{
-						
+						$exist = "fresh";
 						//add a new record
 						$this->quizzes->addResult($resultData);
 						
 					}
 					
+					// get saved right and wrong counts
+					$newres = $this->quizzes->getResults($quiz_ID,$user_ID);
 					
-					$resultPageArray = array(
-					
-					'lessons' => $lessons,
-					'course' => $course,
-					'quiz' => $quiz,
-					'wrong_count' => $wrongCount,
-					'right_count' => $rightCount
-					);
-					
-					
-					if($rightCount>=$quiz_pass_count)
+					if($newres == FALSE){
+						$resultPageArray = array(
+						
+						'lessons' => $lessons,
+						'course' => $course,
+						'quiz' => $quiz,
+						'wrong_count' => $wrongCount,
+						'right_count' => $rightCount,
+						'progress' => $resultAlert,
+						'exist' => FALSE
+						);
+						if($rightCount>=$quiz_pass_count)
 						{
 							//empty the temp table
 							$this->quizzes->deleteTempAns();
@@ -173,6 +187,43 @@ class Quizzes extends CI_Controller {
 							$this->load->view('footer.php');
 							
 						}
+						
+					}else{
+						$resultPageArray = array(
+						
+						'lessons' => $lessons,
+						'course' => $course,
+						'quiz' => $quiz,
+						'wrong_count' => $newres[0]->wrong_count,
+						'right_count' => $newres[0]->right_count,
+						'progress' => $resultAlert,
+						'exist' =>$exist
+						);
+						if($newres[0]->right_count>=$quiz_pass_count)
+						{
+							//empty the temp table
+							$this->quizzes->deleteTempAns();
+							
+							//display the congrats screen and goback option
+							$this->load->view('header.php'); 
+							$this->load->view('quiz_success_view.php',$resultPageArray); 
+							$this->load->view('footer.php');
+							
+							
+						}else{
+							
+							//empty the temp table
+							$this->quizzes->deleteTempAns();
+							
+							//display the failed screen and goback+retry options
+							$this->load->view('header.php'); 
+							$this->load->view('quiz_failed_view.php',$resultPageArray); 
+							$this->load->view('footer.php');
+							
+						}
+					}
+					
+					
 					
 				
 			 }

@@ -18,7 +18,37 @@
 
 <!---------------------- body ------------------->
 <div class="row-fluid">
-	<h1>success</h1>
-	<h1>wrong <?php echo $wrong_count ?></h1>
-	<h1>right <?php echo $right_count ?></h1>
+	<div class="span8 offset2 course">
+		<?php 
+	// check if failure record exist or not 
+	if(isset($exist)){
+		//if the record is fresh
+		if($exist == "fresh"){
+			echo "<h1>succeeded</h1>";
+			echo "<h1>wrong ".$wrong_count."</h1>";
+			echo "<h1>right ".$right_count."</h1>";
+		
+		}
+		// if record is old
+		else{
+			if($progress == "progress"){
+				echo "<h1>success</h1>";
+				echo "<h1>Your are getting better</h1>";
+				echo "<h1>wrong ".$wrong_count."</h1>";
+				echo "<h1>right ".$right_count."</h1>";
+				
+			}else{
+				echo "<h1>success</h1>";
+				echo "<h1>No progress here are you old results</h1>";
+				echo "<h1>wrong ".$wrong_count."</h1>";
+				echo "<h1>right ".$right_count."</h1>";
+				
+			}
+			
+		}
+	}
+	
+	?>
+		
+	</div>
 </div>
