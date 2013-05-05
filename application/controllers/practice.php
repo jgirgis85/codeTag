@@ -39,11 +39,13 @@ class Practice extends CI_Controller {
 		$lessons = $this->lessons->getLessonsByLessonID($lesson_ID);
 		$course = $this->courses->getCourses($course_ID);
 		$practice = $this->practice->getPracticeByPracticeID($practice_ID);
+		$rules = $this->practice->getRules($practice_ID);
 		
 		$data = array(
 			'lessons' => $lessons,
 			'course' => $course,
-			'practice' => $practice
+			'practice' => $practice,
+			'rules'=>$rules
 			 );
 		$this->load->view('header.php'); 
 		$this->load->view('practice_edit.php',$data); 
@@ -65,6 +67,73 @@ class Practice extends CI_Controller {
 		{
 			// if add succeded redirect to the lesson page
 			redirect(base_url().'lessons/lessonExplorer/'.$lesson_ID.'/'.$course_ID);
+		}
+	}
+	
+	
+	
+	public function editPractice($lesson_ID,$course_ID,$practice_ID)
+	{
+		$title = $this->input->post('title');
+		$task = $this->input->post('task');
+		
+		$data = array(
+		'title' =>$title,
+		'task'=>$task
+		);
+		
+		if($this->practice->editPractice($data,$practice_ID) != FALSE)
+		{
+			// if update succeded redirect to the lesson page
+			redirect(base_url().'practice/edit/'.$course_ID.'/'.$lesson_ID.'/'.$practice_ID);
+		}
+	}
+	
+	
+	public function editRule($lesson_ID,$course_ID,$practice_ID,$rule_ID)
+	{
+		$priority = $this->input->post('priority');
+		$rule = $this->input->post('rule');
+		$error = $this->input->post('error');
+		
+		$data = array(
+		'priority' =>$priority,
+		'rule'=>$rule,
+		'error'=>$error
+		);
+		
+		if($this->practice->editRule($data,$rule_ID) != FALSE)
+		{
+			// if update succeded redirect to the practice edit page
+			redirect(base_url().'practice/edit/'.$course_ID.'/'.$lesson_ID.'/'.$practice_ID);
+		}
+	}
+	
+	public function deleteRule($lesson_ID,$course_ID,$practice_ID,$rule_ID)
+	{
+		if($this->practice->deleteRule($rule_ID) != FALSE)
+		{
+			// if delete succeded redirect to the practice edit page
+			redirect(base_url().'practice/edit/'.$course_ID.'/'.$lesson_ID.'/'.$practice_ID);
+		}
+	}
+	public function addRule($lesson_ID,$course_ID,$practice_ID)
+	{
+		$rule = $this->input->post('rule');
+		$error = $this->input->post('error');
+		$priority = $this->input->post('priority');
+		
+		$data = array(
+		'rule'=>$rule,
+		'error' =>$error,
+		'priority'=>$priority,
+		'practice_ID'=>$practice_ID
+		);
+		
+		if($this->practice->addRule($data))
+		{
+			// if add succeded redirect to the lesson page
+			redirect(base_url().'practice/edit/'.$course_ID.'/'.$lesson_ID.'/'.$practice_ID);
 		}
 	}
 	

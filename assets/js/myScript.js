@@ -397,7 +397,38 @@ $(document).ready(function() {
 		
 		});
 		
-	/////////// end of edit Question dialog validation rules		
+	/////////// end of edit Question dialog validation rules	
+		
+	///////////////////// validation for the add Practice Rule dialog
+	$("#addRule").validate({
+		
+		rules:{
+		
+			rule:"required",
+			error:"required",
+			priority:"required"
+		},
+		
+			errorClass: "help-inline"
+		
+		});
+		
+	/////////// end of edit Practice dialog validation rules	
+		
+	///////////////////// validation for the edit Practice Rule dialog
+	$("#editPractice").validate({
+		
+		rules:{
+		
+			task:"required",
+			title:"required"
+		},
+		
+			errorClass: "help-inline"
+		
+		});
+		
+	/////////// end of edit Practice dialog validation rules		
    	
    	
  });

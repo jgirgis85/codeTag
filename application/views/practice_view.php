@@ -18,15 +18,17 @@
 <!---------------------- body ------------------->
 <div class="row-fluid">
 	<div class="span8 offset2 course">
-		<div class="questionHeader"><p class="sessionsTXT grayText" style="font-size: 1.4em !important;">Mission</div>
+		<div class="questionHeader"><p class="sessionsTXT grayText" style="font-size: 1.4em !important;">Task</div>
 			<div class="row-fluid">
 				<div class="span6 editor">
+				<p class="sessionsTXT">Code editor</p>
 				 <textarea id="code" name="code"></textarea>
 				 </div>
 				 <div class="span6">
+				 <p class="sessionsTXT">Preview</p>
 				 <iframe frameBorder="0" class="codePreview" id="preview"></iframe>
 				 </div>
 		 	</div>
-		<div class="sessionListBottom"><p class="sessionsTXT grayText" style="font-size: 1.4em !important;">error and check button</div> 
+		<div class="sessionListBottom"><p class="sessionsTXT grayText" style="font-size: 1.4em !important;">Check button</div> 
 	</div>
 </div>
