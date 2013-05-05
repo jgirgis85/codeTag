@@ -159,6 +159,7 @@ background-color:#f6f6f6;
 	border-radius: 15px 15px 0px 0px;
 }
 
+
 .breadcrumbMargin {
 	margin-bottom: 25px;
 }
@@ -212,4 +213,12 @@ background-color:#f6f6f6;
 
 .grayText{
 	color:#999;
+}
+
+.codePreview{
+	width: 100%;
+	border:2px solid #f0f0f0;
+	border-radius:15px;
+	min-height: 317px;
+	margin-bottom: 40px;
 }

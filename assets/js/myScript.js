@@ -1,5 +1,9 @@
 $(document).ready(function() {
 	
+	
+	
+
+	
 	// activating the selectable question answers
 	
 	$( "#selectable" ).selectable({
@@ -372,6 +376,21 @@ $(document).ready(function() {
 			wAns1:"required",
 			wAns2:"required",
 			wAns3:"required"
+		},
+		
+			errorClass: "help-inline"
+		
+		});
+		
+	/////////// end of edit Question dialog validation rules
+			
+	///////////////////// validation for the add Practice dialog
+	$("#addPractice").validate({
+		
+		rules:{
+		
+			task:"required",
+			title:"required"
 		},
 		
 			errorClass: "help-inline"

@@ -11,6 +11,7 @@ class Lessons extends CI_Controller {
 			$this->load->model('Courses_model','courses');
 			$this->load->model('Videos_model','videos');
 			$this->load->model('Quizzes_model','quizzes');
+			$this->load->model('Practice_model','practice');
 			
 			
 		}
@@ -24,6 +25,7 @@ class Lessons extends CI_Controller {
 		$editMode = $this->session->userdata('editMode');
 		$lessons = $this->lessons->getLessons($id);
 		$course = $this->courses->getCourses($id);
+		
 			
 			$data = array(
 			'editMode' => $editMode,
@@ -88,6 +90,7 @@ class Lessons extends CI_Controller {
 		// search in the videos table for video lessons
 		$videos = $this->videos->getVideos($lesson_ID);
 		$quizzes = $this->quizzes->getQuizzes($lesson_ID);
+		$practice = $this->practice->getPractice($lesson_ID);
 		
 		
 		//call a single lesson view send the data to this view
@@ -100,7 +103,8 @@ class Lessons extends CI_Controller {
 			'lessons' => $lessons,
 			'course' => $course,
 			'videos' => $videos,
-			'quizzes' => $quizzes
+			'quizzes' => $quizzes,
+			'practice' => $practice
 			);
 			$this->load->view('header.php'); 
 			$this->load->view('sgl_lesson_view.php',$data); 

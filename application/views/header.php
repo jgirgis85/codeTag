@@ -12,7 +12,10 @@
     <link href="<?php echo base_url(); ?>assets/css/bootstrap_new.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/vader/jquery-ui-1.10.2.custom.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/editor/lib/codemirror.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/editor/theme/monokai.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">
+    
     
     <style>
       .containerBody {

@@ -14,7 +14,7 @@
 				<div class="span5 offset6">
 					<a href="#addVideoModel" data-toggle="modal"><button style="margin-bottom: 15px;width: 110px" class="btn btn btn-success">Add video</button></a>
 					<a href="#addQuizModel" data-toggle="modal"><button style="margin-bottom: 15px;width: 110px" class="btn btn btn-success">Add quiz</button></a>
-					<a href="#" data-toggle="modal"><button style="margin-bottom: 15px;width: 110px" class="btn btn btn-success">Add practice</button></a>
+					<a href="#addPracticeModel" data-toggle="modal"><button style="margin-bottom: 15px;width: 110px" class="btn btn btn-success">Add practice</button></a>
 				</div>
 			<?php }else{ ?>
 				<ul class="breadcrumb">
@@ -98,14 +98,39 @@
 		<?php endforeach ?>	
 		
 			<!---------------------------------- listing lesson practices ------------------------------>
+			<?php foreach($practice as $prac): ?>
 			<div class="row-fluid">
-				<div class="span8">
-					<p>practice</p>
-					<p>practice</p>
-					<p>practice</p>
-					<button class="btn">view</button>
+				<div class="span2" style="text-align: center;">
+					<img src="<?php echo base_url(); ?>assets/img/practice.png" />
 				</div>
+				
+				<?php if($editMode== true){ ?>
+				<div class="span6">
+					<p class="sessionsTXT"><?php echo $prac->title ?></p>
+				</div>
+				<div class="span4">
+					<a href="<?php echo base_url() ?>practice/practice_view/<?php echo $course[0]->course_ID ?>/<?php echo $lessons[0]->lesson_ID ?>/<?php echo $prac->practice_ID ?>" >
+						<button style="width: 68px;margin-bottom: 15px;" class="btn">Solve</button>
+					</a>
+					<a href="<?php echo base_url() ?>practice/edit/<?php echo $course[0]->course_ID ?>/<?php echo $lessons[0]->lesson_ID ?>/<?php echo $prac->practice_ID ?>" >
+						<button style="width: 68px;margin-bottom: 15px;" class="btn btn-warning">Edit</button>
+					</a>
+					<button style="width: 68px;margin-bottom: 15px;" class="btn btn-danger">Delete</button>
+				</div>
+				<?php }else { ?>
+				<div class="span8">
+					<p class="sessionsTXT"><?php echo $prac->title ?></p>
+				</div>
+				<div class="span1">
+					<a href="<?php echo base_url() ?>practice/practice_view/<?php echo $course[0]->course_ID ?>/<?php echo $lessons[0]->lesson_ID ?>/<?php echo $prac->practice_ID ?>" >
+					<button style="width: 68px;margin-bottom: 15px;" class="btn">Solve</button>
+					</a>
+				</div>
+				<?php } ?>
 			</div>
+			<div class="sessionsbreak"></div>
+			<?php endforeach ?>	
+			
 		<div class="sessionListBottom"><p> VIDEOS •  QUIZ • 0 PRACTICE</p></div>
 		</div>
 		
@@ -136,6 +161,28 @@
 			    <input type="text" name="sec" value="" placeholder="Sec" /><br />
 			    <label>Embed URL :</label>
 			    <input class="largeInput" type="text" name="embedUrl" value="" placeholder="embedUrl" /><br />
+			  </div>
+			  <div class="modal-footer">
+			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			    <button type="submit" class="btn btn-success">Add</button>
+			  </div>
+			  <?php echo form_close() ?>
+		</div>
+		
+<!----------------- Add Practice  Modal --------------------->
+		
+		<div id="addPracticeModel" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h3 id="myModalLabel">Add Practice</h3>
+			  </div>
+			  <div class="modal-body">
+			  	<?php $attributes = array('id' => 'addPractice'); ?>
+			  	<?php echo form_open('practice/addPractice/'.$lessons[0]->lesson_ID.'/'.$course[0]->course_ID,$attributes)?>
+			    <label>Title :</label>
+			    <input type="text" name="title" value="" placeholder="Title" /><br />
+			    <label>Task :</label>
+			    <textarea style="min-width: 300px;min-height: 100px" name="task"></textarea>
 			  </div>
 			  <div class="modal-footer">
 			    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
