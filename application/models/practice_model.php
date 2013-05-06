@@ -42,6 +42,14 @@
 		$this->db->order_by('priority','desc');
 		return $this->db->get()->result();
 	}
+	function getRulesByPriority($currentPriority)
+	{
+		$this->db->select('rule,rule_ID,error');
+		$this->db->from('rules');
+		$this->db->where('priority',$currentPriority);
+		$this->db->order_by('priority','desc');
+		return $this->db->get()->result();
+	}
 	function deleteRule($rule_ID) 
 	{
 	    $this->db->where('rule_ID', $rule_ID);

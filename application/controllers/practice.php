@@ -158,7 +158,16 @@ class Practice extends CI_Controller {
 	{
 		$currentPriority = $this->input->post('currentPriority');
 		// get rules for the current priority
-		$currentRules = $this->practice->getRulesByPriority($currentPriority);
+		if($currentRules = $this->practice->getRulesByPriority($currentPriority)){
+			
+			$result = array(
+			'status' =>'success',
+			'currentRules'=>$currentRules
+			
+			);
+			
+			echo json_encode($result);
+		}
 		
 	}
 	

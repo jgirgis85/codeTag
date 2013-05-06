@@ -26,12 +26,9 @@ $(document).ready(function() {
       //check for practice answer
 	
 	$('button[name="check"]').click(function(){
-	var ideContent = editor.getValue();	
-	// if (a.indexOf('<h1>') > -1) {
-	  // alert('true');
-	// } else {
-	 // alert('false');
-	// }
+		$('#errors').empty();
+		errorStatus = false;
+		var ideContent = editor.getValue();	
 		var practice_ID = $('input[name="practice_ID"]').val();
 		var data = {practice_ID: practice_ID};
 		$.ajax({
@@ -59,6 +56,20 @@ $(document).ready(function() {
 								            {
 								                if (json.status == "success")   
 								                {
+								                	json.currentRules.forEach(function(){
+								                		//get rule and error
+								                		rule = json.currentRules[0].rule;
+								                		error = json.currentRules[0].error;
+								                		//check if rule exists in the IDE content
+								                		if (ideContent.indexOf(rule)== -1) {
+														  //append errors to hidden div
+														  $('#errors').append('<p>'+error+'</p>')
+														  errorStatus = true;
+														} else {
+														 
+														}
+								                		
+								                	})
 								                	
 								                }
 								                
@@ -66,11 +77,14 @@ $(document).ready(function() {
 								       });
 							  	
 							  	
-							  }
+							  }//end for each current priority
+							if(errorStatus == true){alert('me')}  
 		                }
+		                
 		               }
+		              
 		});
-	
+		
 	});
 	
 });
