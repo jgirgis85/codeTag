@@ -1,9 +1,6 @@
 $(document).ready(function() {
 	
 	
-	
-
-	
 	// activating the selectable question answers
 	
 	$( "#selectable" ).selectable({

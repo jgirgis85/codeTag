@@ -33,6 +33,15 @@
 		$this->db->order_by('priority','asc');
 		return $this->db->get()->result();
 	}
+	
+	function getHighestRulePriority($practice_ID)
+	{
+		$this->db->select('priority');
+		$this->db->from('rules');
+		$this->db->where('practice_ID',$practice_ID);
+		$this->db->order_by('priority','desc');
+		return $this->db->get()->result();
+	}
 	function deleteRule($rule_ID) 
 	{
 	    $this->db->where('rule_ID', $rule_ID);

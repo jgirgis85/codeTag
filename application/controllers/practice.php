@@ -137,5 +137,30 @@ class Practice extends CI_Controller {
 		}
 	}
 	
+	public function getHighestPriorityCount()
+	{
+		$practice_ID = $this->input->post('practice_ID');
+		
+		if($priority = $this->practice->getHighestRulePriority($practice_ID)){
+				
+			$result = array(
+			'status' =>'success',
+			'priority'=>$priority[0]->priority
+			
+			);
+			
+			echo json_encode($result);
+		}
+		
+	}
+	
+	public function getRules()
+	{
+		$currentPriority = $this->input->post('currentPriority');
+		// get rules for the current priority
+		$currentRules = $this->practice->getRulesByPriority($currentPriority);
+		
+	}
+	
 	
 }

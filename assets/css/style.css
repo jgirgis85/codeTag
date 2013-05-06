@@ -218,7 +218,7 @@ background-color:#f6f6f6;
 .codePreview{
 	width: 100%;
 	border:2px solid #f0f0f0;
-	border-radius:15px;
+	border-radius:5px;
 	min-height: 317px;
 	margin-bottom: 40px;
 }

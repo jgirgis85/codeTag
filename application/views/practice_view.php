@@ -29,6 +29,7 @@
 				 <iframe frameBorder="0" class="codePreview" id="preview"></iframe>
 				 </div>
 		 	</div>
-		<div class="sessionListBottom"><p class="sessionsTXT grayText" style="font-size: 1.4em !important;">Check button</div> 
+		 	<input type="hidden" name="practice_ID" value="<?php echo $practice[0]->practice_ID ?>" />
+		<div class="sessionListBottom"><p class="sessionsTXT grayText" style="font-size: 1.4em !important;"><button name="check" class="btn btn-warning">Check</button></div> 
 	</div>
 </div>
