@@ -137,38 +137,54 @@ class Practice extends CI_Controller {
 		}
 	}
 	
-	public function getHighestPriorityCount()
+	public function checkErrors()
 	{
+		$errors = array();
 		$practice_ID = $this->input->post('practice_ID');
+		$ideContent = $this->input->post('ideContent');
 		
 		if($priority = $this->practice->getHighestRulePriority($practice_ID)){
 				
-			$result = array(
+			$highestPriority = 	$priority[0]->priority;
+			
+			for ($i=1; $i <= $highestPriority; $i++) { 
+				// get rules for the current priority
+			$currentRules= $this->practice->getRulesByPriority($i);
+				foreach ($currentRules as $rule) {
+					
+					//check for rule existance and if not add error to the errors array
+					
+					if(strpos($ideContent,$rule->rule)=== false){
+						array_push($errors,$rule->error);
+					}
+					
+					
+				}
+				if(!empty($errors)){
+						break;
+					}
+			
+			}
+				
+
+		}
+		
+		$result = array(
 			'status' =>'success',
-			'priority'=>$priority[0]->priority
+			'errors'=>$errors
 			
 			);
 			
 			echo json_encode($result);
-		}
 		
 	}
 	
-	public function getRules()
+	public function savePracticeResult()
 	{
-		$currentPriority = $this->input->post('currentPriority');
-		// get rules for the current priority
-		if($currentRules = $this->practice->getRulesByPriority($currentPriority)){
-			
-			$result = array(
-			'status' =>'success',
-			'currentRules'=>$currentRules
-			
-			);
-			
-			echo json_encode($result);
-		}
+		$practice_ID = $this->input->post('practice_ID');
+		$status = $this->input->post('status');
 		
+		// check if a result for this practice and this user already exist if yes update it if not add new one
 	}
 	
 	

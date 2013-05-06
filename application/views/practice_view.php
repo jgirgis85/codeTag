@@ -30,9 +30,15 @@
 				 </div>
 		 	</div>
 		 	<input type="hidden" name="practice_ID" value="<?php echo $practice[0]->practice_ID ?>" />
-		<div class="sessionListBottom">
-			<button name="check" class="btn btn-warning">Check</button>
-			<div id="errors"></div>
+		<div class="sessionListBottomFlex">
+			<div class="row-fluid">
+				<div class="span10">
+					<div id="errors"></div>
+				</div>
+				<div id="checkBtn" class="span1">
+				<button name="check" class="btn btn-warning">Check</button>
+				</div>
+			</div>
 		</div> 
 			
 	</div>
