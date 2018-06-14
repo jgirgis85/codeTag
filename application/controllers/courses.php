@@ -21,6 +21,7 @@ class Courses extends CI_Controller {
 			'editMode' => $editMode,
 			'courses' => $courses
 			);
+			//test
 			
 			$this->load->view('header.php'); 
 			$this->load->view('courses_view.php',$data); 
